@@ -1,0 +1,23 @@
+{
+  "name": "findahome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grivel-l/FindAHome.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grivel-l/FindAHome/issues"
+  },
+  "homepage": "https://github.com/Grivel-l/FindAHome#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
