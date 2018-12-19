@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Grivel-l/FindAHome#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "leboncoin-api": "0.0.35",
     "node-fetch": "^2.3.0"
   }
 }
