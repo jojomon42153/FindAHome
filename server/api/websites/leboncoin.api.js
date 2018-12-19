@@ -9,7 +9,23 @@ module.exports = {
 			.setRegion("rhone_alpes")
 			.setLocation([{zipcode: "69002"}])
 			.addSearchExtra("price", {max: 1300})
-			.run();
+			.run()
+			.then(result => {
+				return result.results.map(home => ({
+				bedrooms: null,
+				zipCode: home.location.zipcode,
+				description: home.description,
+				floor: null,
+				title: home.title,
+				elevator: null,
+				link: home.link,
+				images: home.images || null,
+				price: home.price,
+				ref: home.attributes.custom_ref,
+				rooms: home.attributes.rooms,
+				surface: home.attributes.square
+				}));
+			});
 	}
 };
 
