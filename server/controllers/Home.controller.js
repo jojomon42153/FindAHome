@@ -29,15 +29,12 @@ class Home {
 						const notify = [];
 						allHomes.map(home => {
 							const element = savedHomes.find(element => element.checksum === home.checksum);
-							if (element !== undefined) {
-								notify.push(element);
+							if (element === undefined) {
+								notify.push(home);
 							}
 						});
-						return this.model.update(allHomes)
-							.then(() => {
-								this.model.getAll()
-									.then(result => console.log(result));
-							});
+						console.log("Notifications: ", notify);
+						return this.model.update(allHomes);
 					});
 			})
 			.catch(error => {

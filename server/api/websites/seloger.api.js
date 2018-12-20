@@ -6,7 +6,12 @@ module.exports = {
 			.then(result => {
 				return result.text()
 					.then(response => {
-						response = JSON.parse(response.split("\"products\" : ")[1].split("\"ctx\"")[0].trim().slice(0, -1));
+						response = response.split("\"products \" : ")[1];
+						if (response === undefined) {
+							console.error("An error occured with Seloger");
+							return [];
+						}
+						response = JSON.parse(response.split("\"ctx\"")[0].trim().slice(0, -1));
 						return response.map(home => ({
 							bedrooms: home.nb_chambres,
 							zipCode: home.codepostal,
