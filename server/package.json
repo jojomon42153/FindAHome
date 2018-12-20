@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "leboncoin-api": "0.0.35",
+    "mongoose": "^5.4.0",
     "node-fetch": "^2.3.0"
   }
 }
