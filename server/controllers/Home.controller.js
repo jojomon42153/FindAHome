@@ -1,10 +1,18 @@
 const fs = require("fs");
+const crypto = require("crypto-js");
 
 const HomeModel = require("../models/Home.model");
 
 class Home {
 	constructor() {
 		this.model = new HomeModel();
+	}
+
+	createChecksums(homes) {
+		return homes.map(home => {
+			home.checksum = crypto.MD5(JSON.stringify(home)).toString();
+			return home;
+		});
 	}
 
 	getHomes() {
@@ -15,10 +23,21 @@ class Home {
 			.then(homes => {
 				let allHomes = [];
 				homes.map(arr => allHomes = allHomes.concat(arr));
-				return this.model.getHomes()
+				allHomes = this.createChecksums(allHomes);
+				return this.model.getAll()
 					.then(savedHomes => {
-						console.log(savedHomes);
-						return allHomes;
+						const notify = [];
+						allHomes.map(home => {
+							const element = savedHomes.find(element => element.checksum === home.checksum);
+							if (element !== undefined) {
+								notify.push(element);
+							}
+						});
+						return this.model.update(allHomes)
+							.then(() => {
+								this.model.getAll()
+									.then(result => console.log(result));
+							});
 					});
 			})
 			.catch(error => {

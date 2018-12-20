@@ -1,8 +1,17 @@
 const dtb = require("mongoose").model("Home");
 
 class HomeModel {
-	getHomes() {
-		return dtb.find({});
+	deleteAll() {
+		return dtb.deleteMany({});
+	}
+
+	update(homes) {
+		return this.deleteAll()
+			.then(() => dtb.create(homes));
+	}
+
+	getAll() {
+		return dtb.find({}, null, {lean: true});
 	}
 }
 

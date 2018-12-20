@@ -11,6 +11,7 @@ module.exports = dtb => {
 		rooms: {type: Number},
 		surface: {type: Number},
 		title: {type: String, trim: true},
-		link: {type: String, trim: true}
+		link: {type: String, trim: true},
+		checksum: {type: String, required: true}
 	}));
 };
