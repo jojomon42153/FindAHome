@@ -10,7 +10,7 @@ app.listen(3000, () => {
 	mongoose.connection.on("connected", () => {
 		console.log("Server is running");
 		HomeController.getHomes();
-		setInterval(() => HomeController.getHomes(), 30000);
+		setInterval(() => HomeController.getHomes(), 120000);
 	});
  	mongoose.connect("mongodb://localhost/FindAHome", {useNewUrlParser: true});
 });
