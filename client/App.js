@@ -1,21 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from "react";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>HelloWorld !</Text>
-      </View>
-    );
-  }
+import App from "./app/components/App";
+import reducers from "./app/reducers/";
+
+class Index extends Component {
+	render() {
+		const store = createStore(reducers);
+		return (
+			<Provider store={store}>
+				<App />
+			</Provider>
+		);
+	}
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default Index;
+
