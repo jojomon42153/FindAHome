@@ -1,7 +1,7 @@
 const initialState = {};
 
-const homes = (state = initialState, action) => {
-	switch (action.type) {
+const homes = (state = initialState, {type}) => {
+	switch (type) {
 		default:
 			return state;
 	}
