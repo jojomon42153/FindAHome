@@ -1,7 +1,18 @@
-const initialState = {};
+import {HOMES_GETTED} from "../actions/homes";
 
-const homes = (state = initialState, {type}) => {
+const initialState = {
+	homes: []
+};
+
+const homes = (state = initialState, {type, payload}) => {
 	switch (type) {
+		case HOMES_GETTED:
+			return {
+				...state,
+				homes: {
+					...payload
+				}
+			};
 		default:
 			return state;
 	}
