@@ -16,6 +16,10 @@ class Home {
 	}
 
 	getHomes() {
+		return this.model.getAll();
+	}
+
+	updateHomes() {
 		const promises = [];
 		const files = fs.readdirSync("./api/websites/");
 		files.map(file => promises.push((require(`../api/websites/${file}`)).getHome()));
