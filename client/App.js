@@ -8,12 +8,20 @@ import reducers from "./app/reducers/";
 import sagas from "./app/sagas";
 
 class Index extends Component {
-	render() {
+	constructor() {
+		super();
+		this.store = null;
+	}
+
+	componentWillMount() {
 		const sagaMiddlware = createSagaMiddleware();
-		const store = createStore(reducers, applyMiddleware(sagaMiddlware));
+		this.store = createStore(reducers, applyMiddleware(sagaMiddlware));
 		sagaMiddlware.run(sagas);
+	}
+
+	render() {
 		return (
-			<Provider store={store}>
+			<Provider store={this.store}>
 				<App />
 			</Provider>
 		);

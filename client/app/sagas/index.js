@@ -1,9 +1,10 @@
-import {all} from "redux-saga/effects";
+import {all, fork} from "redux-saga/effects";
 
 import homes from "./homes";
 
 function* root() {
-	yield all({homes});
+	console.log("Executing all sagas");
+	yield all([fork(homes)]);
 }
 
 export default root;
