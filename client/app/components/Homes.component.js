@@ -31,6 +31,12 @@ class Homes extends Component {
 							<Carousel
 								style={{width: this.width, height: 300, backgroundColor: "green"}}
 								autoplay={false}
+								arrows={true}
+								leftArrowStyle={{height: "100%", width: this.width / 2}}
+								rightArrowStyle={{height: "100%", width: this.width / 2}}
+								leftArrowText={" "}
+								rightArrowText={" "}
+								bullets={true}
 							>
 								{item.images !== null ? item.images.map(img => {
 									return (
