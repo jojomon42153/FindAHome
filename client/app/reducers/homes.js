@@ -1,7 +1,7 @@
 import {HOMES_GETTED} from "../actions/homes";
 
 const initialState = {
-	homes: []
+	homes: {}
 };
 
 const homes = (state = initialState, {type, payload}) => {

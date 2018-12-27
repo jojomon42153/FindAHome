@@ -3,7 +3,7 @@ import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
 
-import App from "./app/components/App";
+import Homes from "./app/containers/homes.container";
 import reducers from "./app/reducers/";
 import sagas from "./app/sagas";
 
@@ -22,7 +22,7 @@ class Index extends Component {
 	render() {
 		return (
 			<Provider store={this.store}>
-				<App />
+				<Homes />
 			</Provider>
 		);
 	}
