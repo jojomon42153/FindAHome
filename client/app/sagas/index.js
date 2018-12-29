@@ -1,10 +1,13 @@
 import {all, fork} from "redux-saga/effects";
 
 import homes from "./homes";
+import notifications from "./notifications";
 
 function* root() {
-	console.log("Executing all sagas");
-	yield all([fork(homes)]);
+	yield all([
+		fork(homes),
+		fork(notifications)
+	]);
 }
 
 export default root;

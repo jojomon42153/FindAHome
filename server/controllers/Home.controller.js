@@ -37,7 +37,6 @@ class Home {
 								notify.push(home);
 							}
 						});
-						console.log("Notifications: ", notify);
 						return this.model.update(allHomes);
 					});
 			})

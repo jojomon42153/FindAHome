@@ -1,9 +1,12 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const app = express();
+app.use(bodyParser.json());
 require("./models/schemas/home.schema")(mongoose);
+require("./models/schemas/notifications.schema")(mongoose);
 const HomeController = new (require("./controllers/Home.controller"))();
 const routes = require("./routes/");
 

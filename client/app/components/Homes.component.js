@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import Carousel from "react-native-looped-carousel";
+import {Permissions, Notifications} from "expo";
 
 class Homes extends Component {
 	constructor(props) {
@@ -19,6 +20,26 @@ class Homes extends Component {
 
 	componentWillMount() {
 		this.width = Dimensions.get("window").width;
+		Permissions.getAsync(Permissions.NOTIFICATIONS)
+			.then(({status}) => {
+				if (status === "granted") {
+					this.sendNotificationsToken();
+				} else {
+					return Permissions.askSync(Permissions.NOTIFICATIONS)
+						.then(({status}) => {
+							if (status === "granted") {
+								this.sendNotificationsToken();
+							}
+						});
+				}
+			})
+			.catch(error => {console.error(error)});
+	}
+
+	sendNotificationsToken() {
+		Notifications.getExpoPushTokenAsync()
+			.then(token => this.props.sendNotificationsToken(token))
+			.catch(error => {console.error(error)});
 	}
 
 	renderHomes() {
@@ -83,7 +104,8 @@ const styles = StyleSheet.create({
 });
 
 Homes.propTypes = {
-	homes: PropTypes.object.isRequired
+	homes: PropTypes.object.isRequired,
+	sendNotificationsToken: PropTypes.func.isRequired
 };
 
 export default Homes;

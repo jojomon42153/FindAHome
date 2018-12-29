@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
+import {Permissions, Notifications} from "expo";
 
 import Homes from "./app/containers/homes.container";
 import reducers from "./app/reducers/";
