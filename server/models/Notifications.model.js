@@ -5,6 +5,10 @@ class NotificationsModel {
 		return dtb.findOne({token}, null, {lean: true});
 	}
 
+	getAll() {
+		return dtb.find({}, ["token"], {lean: true});
+	}
+
 	addToken(token) {
 		return dtb.create({token});
 	}

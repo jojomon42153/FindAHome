@@ -1,11 +1,15 @@
 const fs = require("fs");
 const crypto = require("crypto-js");
+const {Expo} = require("expo-server-sdk");
 
 const HomeModel = require("../models/Home.model");
+const NotificationsModel = require("../models/Notifications.model");
 
 class Home {
 	constructor() {
+		this.expoSdk = new Expo();
 		this.model = new HomeModel();
+		this.notificationModel = new NotificationsModel();
 	}
 
 	createChecksums(homes) {
@@ -37,7 +41,32 @@ class Home {
 								notify.push(home);
 							}
 						});
-						return this.model.update(allHomes);
+						return this.model.update(allHomes)
+							.then(() => {
+								if (notify.length > 0 || true) {
+									return this.notificationModel.getAll()
+										.then(tokens => {
+											console.log("Tokens: ", tokens);
+											tokens.map(({token}) => {
+												const chunks = this.expoSdk.chunkPushNotifications([{
+													to: token,
+													sound: "default",
+													body: "A new home is here"
+												}]);
+												(async () => {
+													for (let chunk of chunks) {
+														try {
+															await this.expoSdk.sendPushNotificationsAsync(chunk);
+															console.log("Sent notification");
+														} catch(error) {
+															console.error("Error: ", error);
+														}
+													}
+												})();
+											});
+										});
+								}
+							});
 					});
 			})
 			.catch(error => {
