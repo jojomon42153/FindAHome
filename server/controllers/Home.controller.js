@@ -3,13 +3,13 @@ const crypto = require("crypto-js");
 const {Expo} = require("expo-server-sdk");
 
 const HomeModel = require("../models/Home.model");
-const NotificationsModel = require("../models/Notifications.model");
+const NotificationController = require("./Notifications.controller");
 
 class Home {
 	constructor() {
 		this.expoSdk = new Expo();
 		this.model = new HomeModel();
-		this.notificationModel = new NotificationsModel();
+		this.notificationController = new NotificationController();
 	}
 
 	createChecksums(homes) {
@@ -43,28 +43,9 @@ class Home {
 						});
 						return this.model.update(allHomes)
 							.then(() => {
-								if (notify.length > 0 || true) {
-									return this.notificationModel.getAll()
-										.then(tokens => {
-											console.log("Tokens: ", tokens);
-											tokens.map(({token}) => {
-												const chunks = this.expoSdk.chunkPushNotifications([{
-													to: token,
-													sound: "default",
-													body: "A new home is here"
-												}]);
-												(async () => {
-													for (let chunk of chunks) {
-														try {
-															await this.expoSdk.sendPushNotificationsAsync(chunk);
-															console.log("Sent notification");
-														} catch(error) {
-															console.error("Error: ", error);
-														}
-													}
-												})();
-											});
-										});
+								notify.push(allHomes[0]);
+								if (notify.length > 0) {
+									return this.notificationController.sendNotifications(notify);
 								}
 							});
 					});

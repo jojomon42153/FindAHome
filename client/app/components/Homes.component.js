@@ -15,6 +15,10 @@ class Homes extends Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			fromNotif: []
+		};
+
 		this.width = 0;
 	}
 
@@ -34,6 +38,7 @@ class Homes extends Component {
 				}
 			})
 			.catch(error => {console.error(error)});
+		Notifications.addListener(notification => this.setState({fromNotif: notification.data.homes}));
 	}
 
 	sendNotificationsToken() {
@@ -47,6 +52,10 @@ class Homes extends Component {
 			<FlatList
 				data={Object.values(this.props.homes)}
 				renderItem={({item}, key) => {
+					console.log(this.state);
+					if (this.state.fromNotif.length > 0 && !this.state.fromNotif.includes(item.checksum)) {
+						return null;
+					}
 					return (
 						<View style={styles.home} key={`home${key}`}>
 							<Carousel
@@ -59,11 +68,12 @@ class Homes extends Component {
 								rightArrowText={" "}
 								bullets={true}
 							>
-								{item.images !== null ? item.images.map(img => {
+								{item.images !== null ? item.images.map((img, key) => {
 									return (
 										<Image
 											source={{uri: img.url}}
 											style={{width: this.width, height: "100%", resizeMode: "contain"}}
+											key={`${item.checksum}${key}`}
 										/>
 									);
 								}) : <View />}
