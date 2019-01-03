@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Grivel-l/FindAHome#readme",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
+    "expo-server-sdk": "^3.1.0",
     "express": "^4.16.4",
     "leboncoin-api": "0.0.35",
     "mongoose": "^5.4.0",
