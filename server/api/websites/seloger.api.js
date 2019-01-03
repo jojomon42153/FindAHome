@@ -6,8 +6,6 @@ module.exports = {
 			.then(result => {
 				return result.json()
 					.then(response => {
-						console.log("Response YExy: ", response);
-						return [];
 						return response.products.map(home => ({
 							bedrooms: home.nb_chambres,
 							zipCode: home.codepostal,
@@ -23,6 +21,10 @@ module.exports = {
 							surface: home.surface.replace(",", "."),
 							from: "seloger"
 						}));
+					})
+					.catch(error => {
+						console.error("Error from seloger: ", error);
+						return [];
 					});
 			});
 	}

@@ -25,7 +25,11 @@ module.exports = {
 				surface: home.attributes.square,
 				rooms: home.attributes.rooms,
 				from: "leboncoin"
-			})));
+			})))
+			.catch(error => {
+				console.error("Error from leboncoin: ", error);
+				return [];
+			});
 	}
 };
 

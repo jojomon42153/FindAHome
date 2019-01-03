@@ -20,6 +20,10 @@ module.exports = {
 								link: null,
 								from: "bienici"
 							})));
+				})
+				.catch(error => {
+					console.error("Error from bienici: ", error);
+					return [];
 				});
 	}
 };
