@@ -6,7 +6,7 @@ module.exports = {
 			.then(result => {
 				return result.text()
 					.then(response => {
-						response = response.split("\"products \" : ")[1];
+						response = response.split("products\" : ")[1];
 						if (response === undefined) {
 							console.error("An error occured with Seloger");
 							return [];
@@ -24,7 +24,7 @@ module.exports = {
 							price: home.prix,
 							ref: null,
 							rooms: home.nb_pieces,
-							surface: home.surface,
+							surface: home.surface.replace(",", "."),
 							from: "seloger"
 						}));
 					});
