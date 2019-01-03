@@ -2,17 +2,13 @@ const fetch = require("node-fetch");
 
 module.exports = {
 	getHome: () => {
-		return fetch("https://www.seloger.com/list.htm?types=1,2&projects=1&enterprise=0&price=NaN/1250&rooms=4&bedrooms=3&places=[{ci:690382}]&qsVersion=1.0")
+		return fetch("https://www.seloger.com/list_agatha_ajax_avadata_christie.htm?types=1&projects=1&enterprise=0&price=NaN/1250&surface=50/NaN&rooms=4&bedrooms=3&places=[{ci:690382}|{ci:690387}]&qsVersion=1.0")
 			.then(result => {
-				return result.text()
+				return result.json()
 					.then(response => {
-						response = response.split("products\" : ")[1];
-						if (response === undefined) {
-							console.error("An error occured with Seloger");
-							return [];
-						}
-						response = JSON.parse(response.split("\"ctx\"")[0].trim().slice(0, -1));
-						return response.map(home => ({
+						console.log("Response YExy: ", response);
+						return [];
+						return response.products.map(home => ({
 							bedrooms: home.nb_chambres,
 							zipCode: home.codepostal,
 							description: null,
