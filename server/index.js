@@ -18,5 +18,11 @@ app.listen(3000, () => {
 		setInterval(() => HomeController.updateHomes(), config.fetchInterval * 60000);
 		routes(app);
 	});
- 	mongoose.connect("mongodb://localhost/FindAHome", {useNewUrlParser: true});
+	(function loop() {
+ 		mongoose.connect("mongodb://localhost/FindAHome", {useNewUrlParser: true})
+			.catch(error => {
+				console.error("Couldn't connect to dtb", error);
+				setTimeout(() => loop(), 5000);
+			});
+	})();
 });
