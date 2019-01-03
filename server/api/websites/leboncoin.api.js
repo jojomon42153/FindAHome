@@ -10,8 +10,7 @@ module.exports = {
 			.setLocation([{zipcode: "69002"}])
 			.addSearchExtra("price", {max: 1300})
 			.run()
-			.then(result => {
-				return result.results.map(home => ({
+			.then(result => result.results.map(home => ({
 				bedrooms: null,
 				zipCode: home.location.zipcode,
 				description: home.description,
@@ -23,9 +22,10 @@ module.exports = {
 				price: home.price,
 				ref: home.attributes.custom_ref,
 				rooms: home.attributes.rooms,
-				surface: home.attributes.square
-				}));
-			});
+				surface: home.attributes.square,
+				rooms: home.attributes.rooms,
+				from: "leboncoin"
+			})));
 	}
 };
 

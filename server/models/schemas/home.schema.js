@@ -12,6 +12,7 @@ module.exports = dtb => {
 		surface: {type: Number},
 		title: {type: String, trim: true},
 		link: {type: String, trim: true},
-		checksum: {type: String, required: true}
+		checksum: {type: String, required: true},
+		from: {type: String, required: true}
 	}));
 };

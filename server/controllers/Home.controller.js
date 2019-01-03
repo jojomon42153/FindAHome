@@ -14,7 +14,7 @@ class Home {
 
 	createChecksums(homes) {
 		return homes.map(home => {
-			home.checksum = crypto.MD5(JSON.stringify(home)).toString();
+			home.checksum = crypto.MD5(`${home.price}${home.rooms}${home.zipCode}`).toString();
 			return home;
 		});
 	}
@@ -43,7 +43,6 @@ class Home {
 						});
 						return this.model.update(allHomes)
 							.then(() => {
-								notify.push(allHomes[0]);
 								if (notify.length > 0) {
 									return this.notificationController.sendNotifications(notify);
 								}

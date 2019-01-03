@@ -24,7 +24,8 @@ module.exports = {
 							price: home.prix,
 							ref: null,
 							rooms: home.nb_pieces,
-							surface: home.surface
+							surface: home.surface,
+							from: "seloger"
 						}));
 					});
 			});

@@ -17,7 +17,8 @@ module.exports = {
 								rooms: home.roomsQuantity,
 								surface: home.surfaceArea,
 								title: home.title,
-								link: null
+								link: null,
+								from: "bienici"
 							})));
 				});
 	}

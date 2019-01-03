@@ -52,7 +52,6 @@ class Homes extends Component {
 			<FlatList
 				data={Object.values(this.props.homes)}
 				renderItem={({item}, key) => {
-					console.log(this.state);
 					if (this.state.fromNotif.length > 0 && !this.state.fromNotif.includes(item.checksum)) {
 						return null;
 					}
@@ -78,6 +77,7 @@ class Homes extends Component {
 									);
 								}) : <View />}
 							</Carousel>
+							<Text>{`${item.from.substr(0, 1).toUpperCase()}${item.from.substr(1)}`}</Text>
 							<Text>{item.description}</Text>
 						</View>
 					);
