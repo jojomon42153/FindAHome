@@ -28,6 +28,9 @@ class Notifications {
 	sendNotifications(notifications) {
 		return this.model.getAll()
 			.then(tokens => {
+				if (tokens.length === 0) {
+					return ;
+				}
 				const chunks = [];
 				const many = notifications.length > 1;
 				const homes = notifications.map(notif => notif.checksum);
