@@ -7,8 +7,9 @@ module.exports = {
 			.setPage(1)
 			.setCategory("locations")
 			.setRegion("rhone_alpes")
-			.setLocation([{zipcode: "69002"}])
+			.setLocation([{zipcode: "69002"}, {zipCode: "69007"}])
 			.addSearchExtra("price", {max: 1300})
+			.addSearchExtra("rooms", {min: 4})
 			.run()
 			.then(result => result.results.map(home => ({
 				bedrooms: null,
