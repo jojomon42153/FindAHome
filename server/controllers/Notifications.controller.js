@@ -37,8 +37,7 @@ class Notifications {
 				tokens.map(({token}) => {
 					chunks.push(this.expoSdk.chunkPushNotifications([{
 						to: token,
-						title: `${notifications.length} new home${many ? "s" : ""} ${many ? "are" : "is"} here`,
-						body: "My body",
+						body: `${notifications.length} new home${many ? "s" : ""} ${many ? "are" : "is"} here`,
 						priority: "high",
 						data: {homes}
 					}]));
