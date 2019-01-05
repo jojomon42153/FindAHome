@@ -11,12 +11,14 @@ import PropTypes from "prop-types";
 import Carousel from "react-native-looped-carousel";
 import {Permissions, Notifications} from "expo";
 
+const PER_PAGE = 5;
 class Homes extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			fromNotif: []
+			fromNotif: [],
+			index: PER_PAGE
 		};
 
 		this.width = 0;
@@ -50,7 +52,10 @@ class Homes extends Component {
 	renderHomes() {
 		return (
 			<FlatList
-				data={Object.values(this.props.homes)}
+				removeClippedSubviews={true}
+				onEndReachedThreshold={0.1}
+				onEndReached={() => this.setState({index: this.state.index += PER_PAGE})}
+				data={Object.values(this.props.homes).slice(0, this.state.index)}
 				renderItem={({item}, key) => {
 					if (this.state.fromNotif.length > 0 && !this.state.fromNotif.includes(item.checksum)) {
 						return null;
