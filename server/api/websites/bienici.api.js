@@ -11,7 +11,7 @@ module.exports = {
 								description: home.description,
 								floor: home.floor,
 								elevator: home.hasElevator,
-								images: home.photos,
+								images: home.photos.map(({url}) => url),
 								price: home.price,
 								ref: home.reference,
 								rooms: home.roomsQuantity,

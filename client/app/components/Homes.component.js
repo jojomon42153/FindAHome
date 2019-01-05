@@ -72,10 +72,10 @@ class Homes extends Component {
 								rightArrowText={" "}
 								bullets={true}
 							>
-								{item.images !== null ? item.images.map((img, key) => {
+								{item.images !== null ? item.images.map((uri, key) => {
 									return (
 										<Image
-											source={{uri: img.url}}
+											source={{uri}}
 											style={{width: this.width, height: "100%", resizeMode: "contain"}}
 											key={`${item.checksum}${key}`}
 										/>
