@@ -1,16 +1,36 @@
 const fetch = require("node-fetch");
 const lbcApi = require("leboncoin-api");
 
+const {
+	maxPrice,
+	minRooms,
+	locations,
+	bedrooms
+} = require("../../config/criteria");
+
 module.exports = {
 	getHome: () => {
-		return new lbcApi.Search()
+		let search = new lbcApi.Search()
 			.setPage(1)
-			.setCategory("locations")
-			.setRegion("rhone_alpes")
-			.setLocation([{zipcode: "69002"}, {zipCode: "69007"}])
-			.addSearchExtra("price", {max: 1300})
-			.addSearchExtra("rooms", {min: 4})
-			.run()
+			.setCategory("locations");
+		if (locations !== null) {
+			search = search.setLocation(locations.map(zipCode => ({zipCode: zipCode.toString()})));
+		}
+		if (maxPrice !== null) {
+			let max = maxPrice;
+			const limit = max > 1000 ? 100 : 50;
+			while (max % limit !== 0) {
+				max += 1;
+			}
+			search = search.addSearchExtra("price", {max});
+		}
+		if (minRooms !== null) {
+			search = search.addSearchExtra("rooms", {min: minRooms});
+		}
+		if (bedrooms !== null) {
+			search = search.addSearchExtra("bedrooms", {min: bedrooms});
+		}
+		return search.run()
 			.then(result => result.results.map(home => ({
 				bedrooms: null,
 				zipCode: home.location.zipcode,

@@ -1,8 +1,40 @@
 const fetch = require("node-fetch");
 
+const {
+	maxPrice,
+	minRooms,
+	bedrooms,
+	locations
+} = require("../../config/criteria");
+
 module.exports = {
 	getHome: () => {
-		return fetch("https://www.seloger.com/list_agatha_ajax_avadata_christie.htm?types=1&projects=1&enterprise=0&price=NaN/1250&surface=50/NaN&rooms=4&bedrooms=3&places=[{ci:690382}|{ci:690387}]&qsVersion=1.0")
+		let extra = "";
+		if (maxPrice !== null) {
+			extra += `price=NaN/${maxPrice}`;
+		}
+		if (minRooms !== null) {
+			if (extra !== "") {
+				extra += "&";
+			}
+			extra += `rooms=${minRooms}`;
+		}
+		if (bedrooms !== null) {
+			if (extra !== "") {
+				extra += "&";
+			}
+			extra += `bedrooms=${bedrooms}`;
+		}
+		if (locations !== null) {
+			if (extra !== "") {
+				extra += "&";
+			}
+			extra += `places=${JSON.stringify(locations.map(cp => ({cp}))).split("\"").join("").split(",").join("|")}`
+		}
+		if (extra !== "") {
+			extra += "&";
+		}
+		return fetch(`https://www.seloger.com/list_agatha_ajax_avadata_christie.htm?types=1&projects=1&enterprise=0&surface=50/NaN&${extra}qsVersion=1.0`)
 			.then(result => {
 				return result.json()
 					.then(response => {
