@@ -1,7 +1,7 @@
 import {HOMES_GETTED} from "../actions/homes";
 
 const initialState = {
-	homes: {}
+	homes: []
 };
 
 const homes = (state = initialState, {type, payload}) => {
@@ -9,9 +9,9 @@ const homes = (state = initialState, {type, payload}) => {
 		case HOMES_GETTED:
 			return {
 				...state,
-				homes: {
+				homes: [
 					...payload
-				}
+				]
 			};
 		default:
 			return state;

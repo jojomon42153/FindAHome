@@ -50,16 +50,24 @@ class Homes extends Component {
 	}
 
 	renderHomes() {
+		const fromNotif = this.state.fromNotif.length > 0;
+		const homes = fromNotif ?
+			this.props.homes.filter(({checksum}) => this.state.fromNotif.includes(checksum)) :
+			this.props.homes;
+		if (homes.length === 0) {
+			return (
+				<Text>{fromNotif ? "Notification has expired" : "No home match with your criteria"}</Text>
+			);
+		}
 		return (
 			<FlatList
 				removeClippedSubviews={true}
 				onEndReachedThreshold={0.1}
 				onEndReached={() => this.setState({index: this.state.index += PER_PAGE})}
-				data={Object.values(this.props.homes).slice(0, this.state.index)}
+				data={fromNotif ?
+					homes :
+					homes.slice(0, this.state.index)}
 				renderItem={({item}, key) => {
-					if (this.state.fromNotif.length > 0 && !this.state.fromNotif.includes(item.checksum)) {
-						return null;
-					}
 					return (
 						<View style={styles.home} key={`home${key}`}>
 							<Carousel
@@ -119,7 +127,7 @@ const styles = StyleSheet.create({
 });
 
 Homes.propTypes = {
-	homes: PropTypes.object.isRequired,
+	homes: PropTypes.array.isRequired,
 	sendNotificationsToken: PropTypes.func.isRequired
 };
 
