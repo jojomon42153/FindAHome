@@ -3,10 +3,10 @@ const NotificationsController = new (require("../../../controllers/Notifications
 const sendToken = app => {
 	app.post("/notifications/token", (req, res) => {
 		NotificationsController.addUserToken(req.body.token)
-			.then(() => res.send(200, {}))
+			.then(() => res.status(200).send({}))
 			.catch(error => {
 				console.error("Notifications.post.sendToken", error);
-				res.send(500, "An unknown error occured");
+				res.status(500).send("An unknown error occured");
 			})
 	});
 };
