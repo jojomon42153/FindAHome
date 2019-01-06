@@ -25,10 +25,8 @@ class Home {
 
 	updateHomes() {
 		console.info("Updating homes...");
-		const promises = [];
 		const files = fs.readdirSync("./api/websites/");
-		files.map(file => promises.push((require(`../api/websites/${file}`)).getHome()));
-		Promise.all(promises)
+		Promise.all(files.map(file => require(`../api/websites/${file}`).getHome()))
 			.then(homes => {
 				let allHomes = [];
 				homes.map(arr => allHomes = allHomes.concat(arr));
