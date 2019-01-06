@@ -1,4 +1,4 @@
 module.exports = {
-	fetchInterval: 8 // Minutes
+    fetchInterval: 8 // Minutes
 };
 
