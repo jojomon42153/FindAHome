@@ -38,6 +38,8 @@ class Homes extends Component {
         };
 
         this.width = 0;
+        this.updating = false;
+        this.isFirstUpdate = true;
     }
 
     componentWillMount() {
@@ -57,6 +59,19 @@ class Homes extends Component {
             })
             .catch(error => console.error(error));
         Notifications.addListener(notification => this.setState({fromNotif: notification.data.homes}));
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.index !== prevState.index || this.isFirstUpdate) {
+            this.updating = false;
+            this.isFirstUpdate = false;
+            const homes = prevState.fromNotif.length > 0 ? this.props.homes : this.props.homes.slice(0, prevState.index);
+            homes.map(({from, id}) => {
+                if (from === "seloger") {
+                    this.props.getDetails(id);
+                }
+            });
+        }
     }
 
     sendNotificationsToken() {
@@ -79,7 +94,12 @@ class Homes extends Component {
             <FlatList
                 removeClippedSubviews={true}
                 onEndReachedThreshold={0.1}
-                onEndReached={() => this.setState({index: this.state.index += PER_PAGE})}
+                onEndReached={() => {
+                    if (!this.updating || this.state.index > this.props.homes.length) {
+                        this.updating = true;
+                        this.setState({index: this.state.index + PER_PAGE});
+                    }
+                }}
                 data={fromNotif ?
                     homes :
                     homes.slice(0, this.state.index)}
@@ -128,7 +148,8 @@ class Homes extends Component {
 
 Homes.propTypes = {
     homes: PropTypes.array.isRequired,
-    sendNotificationsToken: PropTypes.func.isRequired
+    sendNotificationsToken: PropTypes.func.isRequired,
+    getDetails: PropTypes.func.isRequired
 };
 
 export default Homes;
