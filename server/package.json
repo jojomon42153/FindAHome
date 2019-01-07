@@ -2,10 +2,10 @@
   "name": "findahome",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --inspect --harmony index.js"
+    "start": "nodemon --inspect --harmony app/index.js"
   },
   "repository": {
     "type": "git",

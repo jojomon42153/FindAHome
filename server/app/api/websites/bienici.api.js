@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const {
     maxPrice,
     minRooms
-} = require("../../config/criteria");
+} = require("../../../config/criteria");
 
 module.exports = {
     getHome: () => {

@@ -5,7 +5,7 @@ const {
     minRooms,
     locations,
     bedrooms
-} = require("../../config/criteria");
+} = require("../../../config/criteria");
 
 module.exports = {
     getHome: () => {

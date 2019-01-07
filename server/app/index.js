@@ -8,7 +8,7 @@ require("./models/schemas/home.schema")(mongoose);
 require("./models/schemas/notifications.schema")(mongoose);
 const HomeController = new (require("./controllers/Home.controller"))();
 const routes = require("./routes/");
-const config = require("./config/config");
+const config = require("../config/config");
 
 app.listen(3000, () => {
     let intervalId;

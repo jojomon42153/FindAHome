@@ -25,12 +25,13 @@ class Home {
 
     updateHomes() {
         console.info("Updating homes...");
-        const files = fs.readdirSync("./api/websites/");
+        const files = fs.readdirSync(`${__dirname}/../api/websites/`);
         Promise.all(files.map(file => require(`../api/websites/${file}`).getHome()))
             .then(homes => {
                 let allHomes = [];
                 homes.map(arr => allHomes = allHomes.concat(arr));
                 allHomes = this.createChecksums(allHomes);
+                allHomes = homes[2];
                 return this.model.getAll()
                     .then(savedHomes => {
                         const notify = [];
