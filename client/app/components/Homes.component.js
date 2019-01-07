@@ -55,14 +55,14 @@ class Homes extends Component {
                         });
                 }
             })
-            .catch(() => {});
+            .catch(error => console.error(error));
         Notifications.addListener(notification => this.setState({fromNotif: notification.data.homes}));
     }
 
     sendNotificationsToken() {
         Notifications.getExpoPushTokenAsync()
             .then(token => this.props.sendNotificationsToken(token))
-            .catch(() => {});
+            .catch(error => console.error(error));
     }
 
     renderHomes() {
