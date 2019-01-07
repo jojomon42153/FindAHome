@@ -65,7 +65,7 @@ class Homes extends Component {
         if (this.state.index !== prevState.index || this.isFirstUpdate) {
             this.updating = false;
             this.isFirstUpdate = false;
-            const homes = prevState.fromNotif.length > 0 ? this.props.homes : this.props.homes.slice(0, prevState.index);
+            const homes = this.props.homes.slice(0, this.state.index);
             homes.map(({from, id}) => {
                 if (from === "seloger") {
                     this.props.getDetails(id);
@@ -95,7 +95,7 @@ class Homes extends Component {
                 removeClippedSubviews={true}
                 onEndReachedThreshold={0.1}
                 onEndReached={() => {
-                    if (!this.updating || this.state.index > this.props.homes.length) {
+                    if (!this.updating && this.state.index < this.props.homes.length && !fromNotif) {
                         this.updating = true;
                         this.setState({index: this.state.index + PER_PAGE});
                     }
