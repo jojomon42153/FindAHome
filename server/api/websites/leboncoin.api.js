@@ -43,7 +43,8 @@ module.exports = {
                 ref: home.attributes.custom_ref,
                 rooms: home.attributes.rooms,
                 surface: home.attributes.square,
-                from: "leboncoin"
+                from: "leboncoin",
+                id: null
             })))
             .catch(error => {
                 console.error("Error from leboncoin: ", error);

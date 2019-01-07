@@ -13,6 +13,7 @@ module.exports = dtb => {
         title: {type: String, trim: true},
         link: {type: String, trim: true},
         checksum: {type: String, required: true},
-        from: {type: String, required: true}
+        from: {type: String, required: true},
+        id: {type: Number}
     }));
 };

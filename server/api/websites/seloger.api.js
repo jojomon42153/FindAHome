@@ -51,7 +51,8 @@ module.exports = {
                             ref: null,
                             rooms: home.nb_pieces,
                             surface: home.surface.replace(",", "."),
-                            from: "seloger"
+                            from: "seloger",
+                            id: home.idannonce
                         }));
                     })
                     .catch(error => {

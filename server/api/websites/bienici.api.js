@@ -30,7 +30,8 @@ module.exports = {
                         surface: home.surfaceArea,
                         title: home.title,
                         link: null,
-                        from: "bienici"
+                        from: "bienici",
+                        id: null
                     })));
             })
             .catch(error => {
