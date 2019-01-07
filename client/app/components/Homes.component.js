@@ -104,6 +104,7 @@ class Homes extends Component {
                     homes :
                     homes.slice(0, this.state.index)}
                 renderItem={({item}, key) => {
+                    console.log(item);
                     return (
                         <View style={styles.home} key={`home${key}`}>
                             <Carousel
@@ -127,6 +128,9 @@ class Homes extends Component {
                                 }) : <View />}
                             </Carousel>
                             <Text>{`${item.from.substr(0, 1).toUpperCase()}${item.from.substr(1)}`}</Text>
+                            <Text>{`Price: ${item.price}€`}</Text>
+                            <Text>{`Surface: ${item.surface}m2`}</Text>
+                            <Text>{`Zip code: ${item.zipCode}`}</Text>
                             <Text>{item.description}</Text>
                         </View>
                     );
