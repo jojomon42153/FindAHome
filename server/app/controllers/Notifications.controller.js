@@ -31,13 +31,12 @@ class Notifications {
                 }
                 const chunks = [];
                 const many = notifications.length > 1;
-                const homes = notifications.map(notif => notif.checksum);
                 tokens.map(({token}) => {
                     chunks.push(this.expoSdk.chunkPushNotifications([{
                         to: token,
                         body: `${notifications.length} new home${many ? "s" : ""} ${many ? "are" : "is"} here`,
                         priority: "high",
-                        data: {homes}
+                        data: {homes: notifications}
                     }]));
                 });
                 const chunksLoop = () => {

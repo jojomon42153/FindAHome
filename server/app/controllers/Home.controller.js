@@ -37,7 +37,7 @@ class Home {
                         allHomes.map(home => {
                             const element = savedHomes.find(element => element.checksum === home.checksum);
                             if (element === undefined) {
-                                notify.push(home);
+                                notify.push(home.checksum);
                             }
                         });
                         return this.model.update(allHomes)

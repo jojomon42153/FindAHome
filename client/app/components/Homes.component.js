@@ -62,10 +62,15 @@ class Homes extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.index !== prevState.index || this.isFirstUpdate) {
+        if (this.state.index !== prevState.index ||
+            this.isFirstUpdate ||
+            this.state.fromNotif.length !== prevState.fromNotif.length ||
+            (prevProps.homes.length === 0 && this.props.homes.length > 0 && this.state.fromNotif.length !== 0)) {
             this.updating = false;
             this.isFirstUpdate = false;
-            const homes = this.props.homes.slice(0, this.state.index);
+            const homes = this.state.fromNotif.length > 0 ? 
+                this.props.homes.filter(({checksum}) => this.state.fromNotif.includes(checksum)) :
+                this.props.homes.slice(0, this.state.index);
             homes.map(({from, id}) => {
                 if (from === "seloger") {
                     this.props.getDetails(id);
@@ -104,7 +109,6 @@ class Homes extends Component {
                     homes :
                     homes.slice(0, this.state.index)}
                 renderItem={({item}, key) => {
-                    console.log(item);
                     return (
                         <View style={styles.home} key={`home${key}`}>
                             <Carousel
