@@ -14,6 +14,7 @@ module.exports = dtb => {
         link: {type: String, trim: true},
         checksum: {type: String, required: true},
         from: {type: String, required: true},
-        id: {type: Number}
+        id: {type: Number},
+        url: {type: String, required: true}
     }));
 };

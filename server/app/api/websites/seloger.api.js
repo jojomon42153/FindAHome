@@ -38,22 +38,26 @@ module.exports = {
             .then(result => {
                 return result.json()
                     .then(response => {
-                        return response.products.map(home => ({
-                            bedrooms: home.nb_chambres,
-                            zipCode: home.codepostal,
-                            description: null,
-                            floor: home.etage,
-                            title: null,
-                            elevator: null,
-                            link: null,
-                            images: null,
-                            price: home.prix,
-                            ref: null,
-                            rooms: home.nb_pieces,
-                            surface: home.surface.replace(",", "."),
-                            from: "seloger",
-                            id: home.idannonce
-                        }));
+                        return response.products.map(home => {
+                            const city = `${home.ville.toLowerCase().split("è").join("e").split(" ").join("-")}-${home.cp.substr(0, 2)}`;
+                            return ({
+                                bedrooms: home.nb_chambres,
+                                zipCode: home.codepostal,
+                                description: null,
+                                floor: home.etage,
+                                title: null,
+                                elevator: null,
+                                link: null,
+                                images: null,
+                                price: home.prix,
+                                ref: null,
+                                rooms: home.nb_pieces,
+                                surface: home.surface.replace(",", "."),
+                                from: "seloger",
+                                id: home.idannonce,
+                                url: `https://www.seloger.com/annonces/locations/appartement/${city}/${home.idannonce}.htm`
+                            });
+                        });
                     })
                     .catch(error => {
                         console.error("Error from seloger: ", error);

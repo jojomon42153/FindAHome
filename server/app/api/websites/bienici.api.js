@@ -31,7 +31,8 @@ module.exports = {
                         title: home.title,
                         link: null,
                         from: "bienici",
-                        id: null
+                        id: null,
+                        url: `https://www.bienici.com/annonce/location/appartement/${home.id}`
                     })));
             })
             .catch(error => {

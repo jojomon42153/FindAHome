@@ -44,7 +44,8 @@ module.exports = {
                 rooms: home.attributes.rooms,
                 surface: home.attributes.square,
                 from: "leboncoin",
-                id: null
+                id: null,
+                url: `https://www.leboncoin.fr/locations/${home.id}.htm`
             })))
             .catch(error => {
                 console.error("Error from leboncoin: ", error);

@@ -9,7 +9,11 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import Carousel from "react-native-looped-carousel";
-import {Permissions, Notifications} from "expo";
+import {
+    Permissions,
+    Notifications,
+    WebBrowser
+} from "expo";
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -135,6 +139,12 @@ class Homes extends Component {
                             <Text>{`Price: ${item.price}€`}</Text>
                             <Text>{`Surface: ${item.surface}m2`}</Text>
                             <Text>{`Zip code: ${item.zipCode}`}</Text>
+                            <Text
+                                onPress={() => WebBrowser.openBrowserAsync(item.url)}
+                                style={{color: "blue"}}
+                            >
+                                {"URL"}
+                            </Text>
                             <Text>{item.description}</Text>
                         </View>
                     );
