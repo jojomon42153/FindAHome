@@ -75,9 +75,9 @@ class Homes extends Component {
             const homes = this.state.fromNotif.length > 0 ? 
                 this.props.homes.filter(({checksum}) => this.state.fromNotif.includes(checksum)) :
                 this.props.homes.slice(0, this.state.index);
-            homes.map(({from, id}) => {
+            homes.map(({from, url, id}) => {
                 if (from === "seloger") {
-                    this.props.getDetails(id);
+                    this.props.getDetails({url, id});
                 }
             });
         }

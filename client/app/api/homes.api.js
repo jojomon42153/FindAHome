@@ -6,8 +6,9 @@ export const getHomesAPI = () => {
         .catch(error => console.error(error));
 };
 
-export const getDetailsAPI = id => {
-    return fetch(`https://www.seloger.com/detail,json,caracteristique_bien.json?idannonce=${id}`)
-        .then(response => response.json());
+export const getDetailsAPI = url => {
+    return fetch(url)
+        .then(response => response.text())
+        .catch(error => console.error(error));
 };
 

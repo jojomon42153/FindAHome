@@ -5,6 +5,7 @@ import {
     fork,
     takeEvery
 } from "redux-saga/effects";
+import DomParser from "xmldom";
 
 import {
     getHomesAPI,
@@ -27,8 +28,26 @@ function* getHomes() {
 
 function* getDetails({payload}) {
     try {
-        const {descriptif} = yield call(getDetailsAPI, payload);
-        yield put({payload: {id: payload, description: descriptif}, type: HOMES_DETAILS_GETTED});
+        const dom = yield call(getDetailsAPI, payload.url);
+        const parser = new DomParser.DOMParser().parseFromString(dom.split("&nbsp").join(" ").split("&eacute").join("é").split("@#").join(""), "text/html");
+        let description = dom.split("'descriptionBien', {")[1];
+        if (description === undefined) {
+            return ;
+        }
+        description = description.split("enumerable")[0].trim().split("value: \"")[1].split("\",")[0].split("\\'").join("'");
+        const imgElements = parser.getElementsByTagName("img");
+        const images = [];
+        let i = 0;
+        while (i < imgElements.$$length) {
+            const src = imgElements.item(i).getAttribute("src");
+            if (src.includes("visuels")) {
+                /* TODO Replace //static url by https://static */
+                console.log("Src: ", src);
+                images.push(src);
+            }
+            i += 1;
+        }
+        yield put({payload: {id: payload.id, description, images}, type: HOMES_DETAILS_GETTED});
     } catch (error) {
         console.error("An error occured", error);
     }

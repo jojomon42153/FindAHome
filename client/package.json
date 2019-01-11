@@ -13,7 +13,8 @@
     "react-native-looped-carousel": "^0.1.13",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
-    "redux-saga": "^0.16.2"
+    "redux-saga": "^0.16.2",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
