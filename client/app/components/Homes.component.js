@@ -125,7 +125,7 @@ class Homes extends Component {
                                 rightArrowText={" "}
                                 bullets={true}
                             >
-                                {item.images !== null ? item.images.map((uri, key) => {
+                                {item.images !== null && item.images.length > 0 ? item.images.map((uri, key) => {
                                     return (
                                         <Image
                                             source={{uri}}
