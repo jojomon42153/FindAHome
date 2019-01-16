@@ -4,6 +4,7 @@ const {Expo} = require("expo-server-sdk");
 
 const HomeModel = require("../models/Home.model");
 const NotificationController = require("./Notifications.controller");
+const Error = new (require("../helpers/Errors.helper"))();
 
 class Home {
     constructor() {
@@ -49,7 +50,7 @@ class Home {
                     });
             })
             .catch(error => {
-                console.error("An error occured", error);
+                Error.printErr("HomeController", error);
             });
     }
 }

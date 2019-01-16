@@ -6,6 +6,7 @@ const {
     bedrooms,
     locations
 } = require("../../../config/criteria");
+const Error = new (require("../../helpers/Errors.helper"))();
 
 module.exports = {
     getHome: () => {
@@ -36,6 +37,9 @@ module.exports = {
         }
         return fetch(`https://www.seloger.com/list_agatha_ajax_avadata_christie.htm?types=1&projects=1&enterprise=0&surface=50/NaN&${extra}qsVersion=1.0`)
             .then(result => {
+                if (result.status !== 200) {
+                    return Promise.reject({status: result.status, statusText: result.statusText});
+                }
                 return result.json()
                     .then(response => {
                         return response.products.map(home => {
@@ -58,11 +62,11 @@ module.exports = {
                                 url: `https://www.seloger.com/annonces/locations/appartement/${city}/${home.idannonce}.htm`
                             });
                         });
-                    })
-                    .catch(error => {
-                        console.error("Error from seloger: ", error);
-                        return [];
                     });
+            })
+            .catch(error => {
+                Error.printError("seloger", error);
+                return [];
             });
     }
 };

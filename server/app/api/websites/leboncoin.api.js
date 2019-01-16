@@ -6,6 +6,7 @@ const {
     locations,
     bedrooms
 } = require("../../../config/criteria");
+const Error = new (require("../../helpers/Errors.helper"))();
 
 module.exports = {
     getHome: () => {
@@ -48,7 +49,7 @@ module.exports = {
                 url: `https://www.leboncoin.fr/locations/${home.id}.htm`
             })))
             .catch(error => {
-                console.error("Error from leboncoin: ", error);
+                Error.printError("leboncoin", error);
                 return [];
             });
     }
