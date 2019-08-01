@@ -38,19 +38,21 @@ class Home {
                         allHomes.map(home => {
                             const element = savedHomes.find(element => element.checksum === home.checksum);
                             if (element === undefined) {
-                                notify.push(home.checksum);
+                                notify.push(home);
                             }
                         });
                         return this.model.update(allHomes)
                             .then(() => {
                                 if (notify.length > 0) {
+                                  ///////////////////////ICI L'ENVOI DE MAILS////////////////////
+                                  ///////////////////////RETOUR PROMISE
                                     return this.notificationController.sendNotifications(notify);
                                 }
                             });
                     });
             })
             .catch(error => {
-                Error.printErr("HomeController", error);
+                console.log("HomeController", error);
             });
     }
 }

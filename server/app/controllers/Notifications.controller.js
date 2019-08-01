@@ -23,39 +23,43 @@ class Notifications {
             });
     }
 
-    sendNotifications(notifications) {
-        return this.model.getAll()
-            .then(tokens => {
-                if (tokens.length === 0) {
-                    return ;
-                }
-                const chunks = [];
-                const many = notifications.length > 1;
-                tokens.map(({token}) => {
-                    chunks.push(this.expoSdk.chunkPushNotifications([{
-                        to: token,
-                        body: `${notifications.length} new home${many ? "s" : ""} ${many ? "are" : "is"} here`,
-                        priority: "high",
-                        data: {homes: notifications}
-                    }]));
-                });
-                const chunksLoop = () => {
-                    const iterator = sendChunks(chunks.shift(), this.expoSdk);
-                    (function loop() {
-                        const value = iterator.next().value;
-                        if (value !== undefined) {
-                            value
-                                .then(loop());
-                        } else {
-                            if (chunks.length > 0) {
-                                chunksLoop();
-                            }
-                        }
-                    })();
-                };
-                chunksLoop();
-            });
+    sendNotifications(params) {
+        console.log(params);
+        return require("../services/mailIt.js")(params);
     }
+    // sendNotifications(notifications) {
+    //     return this.model.getAll()
+    //         .then(tokens => {
+    //             if (tokens.length === 0) {
+    //                 return ;
+    //             }
+    //             const chunks = [];
+    //             const many = notifications.length > 1;
+    //             tokens.map(({token}) => {
+    //                 chunks.push(this.expoSdk.chunkPushNotifications([{
+    //                     to: token,
+    //                     body: `${notifications.length} new home${many ? "s" : ""} ${many ? "are" : "is"} here`,
+    //                     priority: "high",
+    //                     data: {homes: notifications}
+    //                 }]));
+    //             });
+    //             const chunksLoop = () => {
+    //                 const iterator = sendChunks(chunks.shift(), this.expoSdk);
+    //                 (function loop() {
+    //                     const value = iterator.next().value;
+    //                     if (value !== undefined) {
+    //                         value
+    //                             .then(loop());
+    //                     } else {
+    //                         if (chunks.length > 0) {
+    //                             chunksLoop();
+    //                         }
+    //                     }
+    //                 })();
+    //             };
+    //             chunksLoop();
+    //         });
+    // }
 }
 
 module.exports = Notifications;
