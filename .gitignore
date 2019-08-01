@@ -3,3 +3,4 @@ package-lock.json
 keystore
 server/db/*
 !server/db/.gitkeep
+config/criteria.js
