@@ -39,8 +39,9 @@ module.exports = (apparts) => {
         to: [
             "jojomon42153@gmail.com",
             "tifuzeauspam@gmail.com",
+            "carolinehamann13002@outlook.fr",
         ],
-        subject: `${apparts.length} nouveaux appartements sont disponibles`,
+        subject: "De nouveaux appartements sont disponibles",
         html,
     };
     //Envoi du mail

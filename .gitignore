@@ -1,5 +1,5 @@
 node_modules
 package-lock.json
 keystore
-db/*
-!db/.gitkeep
+server/db/*
+!server/db/.gitkeep
