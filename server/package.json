@@ -5,7 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --inspect --harmony app/index.js"
+    "start": "mongod --dbpath db &; nodemon --inspect --harmony app/index.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "expo-server-sdk": "^3.1.0",
     "express": "^4.16.4",
     "leboncoin-api": "0.0.35",
+    "mongo": "^0.1.0",
     "mongoose": "^5.4.0",
     "node-fetch": "^2.3.0",
     "nodemailer": "^6.3.0"
