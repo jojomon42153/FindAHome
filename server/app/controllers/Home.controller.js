@@ -38,7 +38,7 @@ class Home {
                         allHomes.map(home => {
                             const element = savedHomes.find(element => element.checksum === home.checksum);
                             if (element === undefined) {
-                                notify.push(home.checksum);
+                                notify.push(home);
                             }
                         });
                         return this.model.update(allHomes)
@@ -50,7 +50,7 @@ class Home {
                     });
             })
             .catch(error => {
-                Error.printErr("HomeController", error);
+                console.log("HomeController", error);
             });
     }
 }
