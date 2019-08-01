@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Grivel-l/FindAHome.git"
+    "url": "git+https://github.com/jojomon42153/FindAHome.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Grivel-l/FindAHome/issues"
+    "url": "https://github.com/jojomon42153/FindAHome/issues"
   },
-  "homepage": "https://github.com/Grivel-l/FindAHome#readme",
+  "homepage": "https://github.com/jojomon42153/FindAHome#readme",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "expo-server-sdk": "^3.1.0",
