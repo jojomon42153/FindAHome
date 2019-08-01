@@ -1,4 +1,4 @@
-const { mailsToSend } = require("../../config/criteria");
+const { mailsToSend, user, pass } = require("../../config/criteria");
 
 module.exports = (apparts) => {
 
@@ -7,8 +7,8 @@ module.exports = (apparts) => {
     const transporter = nodemailer.createTransport({
         service: "Gmail",
         auth: {
-            user: "jojomon42153@gmail.com",
-            pass: "Pg4pvduracell@Google",
+            user,
+            pass,
         }
     });
     //Creation du mail a envoyer
