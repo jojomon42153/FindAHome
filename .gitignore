@@ -2,3 +2,5 @@ node_modules
 package-lock.json
 keystore
 server/config/criteria.js
+db/*
+!db/.gitkeep
