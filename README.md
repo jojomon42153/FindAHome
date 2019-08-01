@@ -25,3 +25,5 @@ terminal 2:
     npm start
 
 ````
+
+Quit: ctrl^ + C on both terminals
