@@ -44,8 +44,6 @@ class Home {
                         return this.model.update(allHomes)
                             .then(() => {
                                 if (notify.length > 0) {
-                                  ///////////////////////ICI L'ENVOI DE MAILS////////////////////
-                                  ///////////////////////RETOUR PROMISE
                                     return this.notificationController.sendNotifications(notify);
                                 }
                             });

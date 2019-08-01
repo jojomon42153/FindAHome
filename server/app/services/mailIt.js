@@ -1,17 +1,5 @@
-/*
-    Bienvenue dans mailIt!
-    Usage:
-        Incorporer l"action dans une sequence IBM avec une autre action la précédant qui lui renverra les parametres suivants:
-        {
-            payload: {
-                "id": "l"addresse gmail émettrice",
-                "password": "le mot de passe de l"addresse"
-                "receiver": "addresse mail qui recevra le message"
-                "subject": "sujet du mail"
-                "body": "corps du mail (en code html)"
-                }
-        }
-*/
+const { mailsToSend } = require("../../config/criteria");
+
 module.exports = (apparts) => {
 
     const nodemailer = require("nodemailer");
@@ -36,11 +24,7 @@ module.exports = (apparts) => {
     });
     const mail = {
         from: "< FindAHome Bot >",
-        to: [
-            "jojomon42153@gmail.com",
-            "tifuzeauspam@gmail.com",
-            "carolinehamann13002@outlook.fr",
-        ],
+        to: mailsToSend,
         subject: "De nouveaux appartements sont disponibles",
         html,
     };
