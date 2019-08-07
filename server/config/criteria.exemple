@@ -1,0 +1,13 @@
+// cp criteria.exemple criteria.js
+//
+module.exports = {
+    maxPrice: 4242,
+    minRooms: 1,
+    locations: [00000, 75000],
+    bedrooms: 1,
+    mailsToSend: [
+        "toto@mytoto.to",
+        "tata@mytoto.to",
+    ]
+};
+
