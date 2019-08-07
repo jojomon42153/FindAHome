@@ -14,13 +14,10 @@ module.exports = (apparts) => {
     //Creation du mail a envoyer
     let html = "<html>";
     apparts.forEach(element => {
-        html += "<h1>" + element.from + "</h1>";
-        html += "<h2>" + element.title + "</h2>";
-        html += "<p>" + element.url + "</p>";
-        html += "<p>" + element.price + "</p>";
-        //title
-        //link or url
-        //price
+        html += "<h1>" + element.title + "</h1>";
+        html += "<p><img src=\"" + element.images[0] + "\"/></p>;",
+        html += "<p> Lien: " + element.url + "</p>";
+        html += "<p> Prix: " + element.price + "</p>";
     });
     const mail = {
         from: "< FindAHome Bot >",
@@ -34,6 +31,7 @@ module.exports = (apparts) => {
             if (err) {
                 reject({ status: "KO", err });
             } else {
+                console.log("Mail send");
                 resolve({ status: "OK" });
             }
             transporter.close();
